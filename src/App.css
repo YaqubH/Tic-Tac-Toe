@@ -2,8 +2,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #23272f;
+  background: linear-gradient(-45deg, #52eee9, #2b8dbd, #a41ecd, #6f08a7); /* Creates a vibrant, multi-color gradient background */
+  background-size: 400% 400%; /* Scales the background size to create a dynamic color flow effect */
+  animation: gradient 15s ease infinite;
   color: white;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%; /* Starts the gradient's position */
+  }
+  50% {
+    background-position: 100% 50%; /* Moves the gradient to create a shifting effect */
+  }
+  100% {
+    background-position: 0% 50%; /* Returns the gradient to the starting position for a seamless loop */
+  }
 }
 
 h1 {
@@ -27,11 +41,11 @@ h1 {
 }
 
 .right-border {
-  border-right: 0.2em solid #0074a6;
+  border-right: 0.2em solid #ffffff;
 }
 
 .bottom-border {
-  border-bottom: 0.2em solid #0074a6;
+  border-bottom: 0.2em solid #ffffff;
 }
 
 .x-hover:hover::after {
@@ -46,7 +60,7 @@ h1 {
 
 .strike {
   position: absolute;
-  background-color: darkorange;
+  background-color: rgb(0, 0, 0);
 }
 
 .strike-row-1 {
@@ -96,18 +110,63 @@ h1 {
 
 .game-over {
   text-align: center;
-  border: #5468ff 8px;
-  border-style: dotted;
-  padding: 10px;
-  margin-top: 50px;
-  font-size: 1.5em;
+  color: #FFFFFF;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7),
+               0px 0px 20px rgba(255, 255, 255, 0.5),
+               0px 0px 30px rgba(255, 255, 255, 0.3),
+               0px 0px 40px rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  margin-top: 25px;
+  font-size: 2em;
+  background-color: transparent;
+  border: none;
 }
 
-.reset-button {
-  margin-top: 50px;
-  padding: 20px;
-  background-color: #0074a6;
-  color: white;
+
+.button-64 {
+  align-items: center;
+  background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-family: 'Phantomsans', sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  margin: 30px auto;
+  width: fit-content;
+}
+
+.button-64:active, .button-64:hover {
+  outline: 0;
+}
+
+.button-64 span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
   width: 100%;
-  font-size: 1.5em;
+  height: 100%;
+  transition: 300ms;
+}
+
+.button-64:hover span {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .button-64 {
+    font-size: 24px;
+    min-width: 196px; 
+  }
 }
