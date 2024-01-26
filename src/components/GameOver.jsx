@@ -1,18 +1,29 @@
+import React from 'react';
 import GameState from "./GameState";
 
 function GameOver({ gameState }) {
+  let message = '';
   switch (gameState) {
     case GameState.inProgress:
-      return <></>;
+      return null;
     case GameState.playerOWins:
-      return <div className="game-over">O Wins</div>;
+      message = 'O Wins';
+      break;
     case GameState.playerXWins:
-      return <div className="game-over">X Wins</div>;
+      message = 'X Wins';
+      break;
     case GameState.draw:
-      return <div className="game-over">Draw</div>;
+      message = 'Draw';
+      break;
     default:
-      return <></>;
+      return null;
   }
+
+  return (
+    <div className="game-over" data-text={message}>
+      {message}
+    </div>
+  );
 }
 
 export default GameOver;
