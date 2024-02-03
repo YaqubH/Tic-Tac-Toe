@@ -6,14 +6,17 @@ import Reset from "./Reset";
 import gameOverSoundAsset from "../sounds/game_over.wav";
 import clickSoundAsset from "../sounds/click.wav";
 
+// Initialize sound effects
 const gameOverSound = new Audio(gameOverSoundAsset);
 gameOverSound.volume = 0.2;
 const clickSound = new Audio(clickSoundAsset);
 clickSound.volume = 0.5;
 
+// Player symbols
 const PLAYER_X = "X";
 const PLAYER_O = "O";
 
+// Winning combinations and their corresponding strike class for visual effect
 const winningCombinations = [
   //Rows
   { combo: [0, 1, 2], strikeClass: "strike-row-1" },
@@ -30,6 +33,7 @@ const winningCombinations = [
   { combo: [2, 4, 6], strikeClass: "strike-diagonal-2" },
 ];
 
+// Function to check for a winner or draw, updates the game state and strike class
 function checkWinner(tiles, setStrikeClass, setGameState) {
   for (const { combo, strikeClass } of winningCombinations) {
     const tileValue1 = tiles[combo[0]];
@@ -55,12 +59,15 @@ function checkWinner(tiles, setStrikeClass, setGameState) {
   }
 }
 
+// Main TicTacToe component
 function TicTacToe() {
+  // State hooks for tiles, player turn, strike class, and game state
   const [tiles, setTiles] = useState(Array(9).fill(null));
   const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
   const [strikeClass, setStrikeClass] = useState();
   const [gameState, setGameState] = useState(GameState.inProgress);
 
+  // Handle tile click: updates tiles state and switches player turn
   const handleTileClick = (index) => {
     if (gameState !== GameState.inProgress) {
       return;
@@ -80,6 +87,7 @@ function TicTacToe() {
     }
   };
 
+  // Reset game to initial state
   const handleReset = () => {
     setGameState(GameState.inProgress);
     setTiles(Array(9).fill(null));
@@ -87,22 +95,26 @@ function TicTacToe() {
     setStrikeClass(null);
   };
 
+  // Effect hook to check for a winner whenever the tiles state updates
   useEffect(() => {
     checkWinner(tiles, setStrikeClass, setGameState);
   }, [tiles]);
 
+  // Effect hook to play click sound when a tile is filled
   useEffect(() => {
     if (tiles.some((tile) => tile !== null)) {
       clickSound.play();
     }
   }, [tiles]);
 
+  // Effect hook to play game over sound when the game state changes to anything but inProgress
   useEffect(() => {
     if (gameState !== GameState.inProgress) {
       gameOverSound.play();
     }
   }, [gameState]);
 
+  // Render Tic Tac Toe game with board, game over message, and reset button
   return (
     <div>
       <h1>Tic Tac Toe</h1>
